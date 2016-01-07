@@ -8,6 +8,9 @@ var Ping = {
     ping: function () {
         log('ping from ' + this.options.name);
     },
+    setName: function (name) {
+        this.options.name = name;
+    }
 };
 
 var PingPong = Object.create(Ping);
@@ -21,7 +24,7 @@ PingPong.pingpong = function () {
 };
 
 var pingPong = Object.create(PingPong);
-pingPong.options.name = "PingPong1";
+pingPong.setName("PingPong1");
 pingPong.ping();
 pingPong.pong();
 try {
