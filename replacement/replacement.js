@@ -3,7 +3,7 @@ log('running replacement.js');
 
 var Ping = {
     ping: function () {
-        log('ping');
+        log('ping: ' + this.name);
     },
 }
 
@@ -22,17 +22,26 @@ function PingPong () {
             this[method] = window[cls][method];
         } 
     }
+    this.init = function (name) {
+        this.name = name;
+    };
+
     this.pingpong = function () {
         this.ping();
         this.pong();
-    }
+    };
 }
 
 
-var ping = Object.create(Ping);
-ping.ping();
 var pingPong = new PingPong('Ping', 'Pong'); 
+pingPong.init('p1');
 pingPong.ping();
 pingPong.pong();
 log(typeof pingPong.ping);
+pingPong.pingpong();
+
+
+var pingPong2 = new PingPong('Ping', 'Pong');
+pingPong2.init('p2');
+pingPong2.pingpong();
 pingPong.pingpong();
