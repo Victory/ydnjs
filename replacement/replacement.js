@@ -17,7 +17,6 @@ function PingPong () {
     var cls, method;
     for (var ii = 0; ii < arguments.length; ii++) {
         cls = arguments[ii];
-        this[cls] = Object.create(window[cls]);
         for (method in window[cls]) { 
             this[method] = window[cls][method];
         } 
