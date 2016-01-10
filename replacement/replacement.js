@@ -2,6 +2,7 @@
 log('running replacement.js');
 
 var Ping = {
+    name: 'not set',
     ping: function () {
         log('ping: ' + this.name);
     },
@@ -44,3 +45,6 @@ var pingPong2 = new PingPong('Ping', 'Pong');
 pingPong2.init('p2');
 pingPong2.pingpong();
 pingPong.pingpong();
+
+var pingPong3 = new PingPong('Ping', 'Pong');
+pingPong3.pingpong();
