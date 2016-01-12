@@ -12,10 +12,10 @@ function Ping (name) {
             numPings += 1;
             log('ping num ' + numPings + " for " + myName + " : " + lockVar);
         },
-        incLock: function () {
+        incLock: function (inc) {
             lockKey += 1;
             if ((lockKey - 100) == 1) {
-                lockVar += 1;
+                lockVar += inc;
             }
         },
         init: function (n) {
@@ -31,7 +31,7 @@ function Ping (name) {
 var ping1 = new Ping('ping1');
 var ping2 = new Ping('ping2');
 ping1.ping();
-ping1.incLock();
+ping1.incLock(10);
 ping1.ping();
 ping2.ping();
 ping2.ping();
