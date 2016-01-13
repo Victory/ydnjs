@@ -34,6 +34,9 @@ ping1.ping();
 ping1.incLock(10);
 ping1.ping();
 ping2.ping();
+ping2.incLock(5);
+ping2.incLock(5);
+
 ping2.ping();
 try {
     ping1.P.init('foo');
