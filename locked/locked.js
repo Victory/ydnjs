@@ -33,6 +33,7 @@ var ping2 = new Ping('ping2');
 ping1.ping();
 ping1.incLock(10);
 ping1.ping();
+ping2.init('i am ping2');
 ping2.ping();
 ping2.incLock(5);
 ping2.incLock(5);
