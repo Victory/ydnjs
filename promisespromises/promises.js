@@ -1,6 +1,7 @@
 var whatsHappening = document.getElementById('whats-happening');
 var race1 = document.getElementById('race1');
 var race2 = document.getElementById('race2');
+var all = document.getElementById('all');
 
 whatsHappening.textContent = 'loading';
 
@@ -38,3 +39,6 @@ Promise.race([pRace1, pRace2]).then(function (value) {
     race2.textContent = reason;
 });
 
+Promise.all([pRace1, pRace2]).then(function (value) { 
+    all.textContent = value;
+});
