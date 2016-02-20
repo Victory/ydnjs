@@ -42,3 +42,8 @@ Promise.race([pRace1, pRace2]).then(function (value) {
 Promise.all([pRace1, pRace2]).then(function (value) { 
     all.textContent = value;
 });
+
+var rejected = new Promise(function (resolve, reject) {
+    throw "rejected";
+}).then(function () {}, function (value) { console.log(value); });
+
