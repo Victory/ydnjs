@@ -43,6 +43,10 @@ Promise.all([pRace1, pRace2]).then(function (value) {
     all.textContent = value;
 });
 
+var callReject = new Promise(function(resolve, reject) {
+    reject(4);
+}).then(function () {}, function (value) { console.log(value) });
+
 var rejected = new Promise(function (resolve, reject) {
     throw "rejected";
 }).then(function () {}, function (value) { console.log(value); });
