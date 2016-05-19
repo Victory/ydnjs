@@ -2,7 +2,7 @@
 var Promise = require('../../MyPromise/vPromise.js');
 
 // the queue of things todo
-var todo = [1, 2, 3, 4, 5, 6];
+var todo = [1, 2, 3, undefined, 4, 5, 6];
 
 /**
  * Example of a "useful" async function
@@ -31,7 +31,7 @@ var handleNext = function (q) {
   var y = q.shift();
 
   // if queue is empty ...
-  if (q.length === 0) {
+  if (typeof y == "undefined" && q.length === 0) {
     console.log('chain has ended'); // maybe you want to call render() here or something like that to say you are done
     return; // ... we have nothing todo
   }
@@ -58,10 +58,14 @@ console.log('chain has started');
  in useful 2
  in handleNext 3
  in useful 3
+ in handleNext undefined
+ in useful undefined
  in handleNext 4
  in useful 4
  in handleNext 5
  in useful 5
+ in handleNext 6
+ in useful 6
  chain has ended
 
 **/
