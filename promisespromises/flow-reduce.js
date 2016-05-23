@@ -68,8 +68,7 @@ var vAsync = function (initValue, doer) {
     reduce: reduce
   };
 };
-/** an example "useful maping funtion, that adds 10 to each value async */
-/*
+/** /// an example "useful maping funtion, that adds 10 to each value async
 var myDoer = function (x, y, done) {
   // a random timeout to show that methods still run in order
   var timeout = Math.random() * 1000;
@@ -86,11 +85,9 @@ var myDoer = function (x, y, done) {
 var whenAllDone = function (reduced) {
   console.log("i'm all done!", reduced);
 };
-
 var async = new vAsync(0, myDoer);
 async.reduce([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).allDone(whenAllDone);
-*/
-
+/**/
 if (typeof module != 'undefined') {
   module.exports = vAsync;
 }
