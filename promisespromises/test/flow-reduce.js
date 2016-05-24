@@ -13,11 +13,18 @@ var sumConstTime = function (x, y, done) {
   var timeout = 10;
   setTimeout(function () {
     var next = x + y;
-    console.log(next);
     done(next);
   }, timeout);
 };
 
+
+var sumRandTime = function (x, y, done) {
+  var timeout = Math.random() * 100;
+  setTimeout(function () {
+    var next = x + y;
+    done(next);
+  }, timeout);
+};
 
 describe("allDone", function () {
   this.timeout(15000);
@@ -30,6 +37,14 @@ describe("allDone", function () {
 
   it("Will call with reduced value", function (done) {
     var async = new vAsync(0, sumConstTime);
+    async.reduce(ten).allDone(function (x) {
+      assert(x == 55);
+      done();
+    });
+  });
+
+  it("Will call with reduced value when async has random time", function (done) {
+    var async = new vAsync(0, sumRandTime);
     async.reduce(ten).allDone(function (x) {
       assert(x == 55);
       done();

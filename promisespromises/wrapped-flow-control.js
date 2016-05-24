@@ -7,6 +7,7 @@ var Promise = require('../../MyPromise/vPromise.js');
 var vAsync = function (doer) {
 
   var allResults = [];
+  var curIndex = 0;
 
   var WhenAllDone = function () {
     var toDo;
@@ -44,10 +45,11 @@ var vAsync = function (doer) {
    */
   var handleNext = function (q) {
     // get the next thing to do off the queue
-    var y = q.shift();
+    var y = q[curIndex];
+    curIndex += 1;
 
     // if queue is empty ...
-    if (q.length === 0 && typeof y === "undefined" ) {
+    if (curIndex > q.length) {
       allDone();
       return; // ... we have nothing todo
     }
@@ -59,11 +61,9 @@ var vAsync = function (doer) {
 
 
   var map = function (q) {
-    // copy the queue so we don't mutate what was passed in
-    var qcopy = q;
-
+    curIndex = 0;
     // create the chain
-    var p1 = Promise.resolve(qcopy);
+    var p1 = Promise.resolve(q);
 
     // start the chain, binding to the chain
     p1.then(handleNext.bind(p1));
