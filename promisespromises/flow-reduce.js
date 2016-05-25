@@ -3,6 +3,8 @@
 var Promise = require('../../MyPromise/vPromise.js');
 
 var vAsync = function (initValue, doer) {
+  'use strict';
+
   var curValue = initValue;
   var curIndex = 0;
 
