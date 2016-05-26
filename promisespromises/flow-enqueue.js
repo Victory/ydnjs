@@ -18,13 +18,11 @@ var vAsync = function (doer) {
    * Handles the next element on the queue
    * @param q - the queue
    */
-  var handleNext = function (q) {
-    // get the next thing to do off the queue
-    var y = q[curIndex];
-    curIndex += 1;
+  var handleNext = function () {
+    var y = queue.pop();
 
     // if queue is empty ...
-    if (curIndex > q.length) {
+    if (typeof y === "undefined" && queue.length === 0) {
       return; // ... there is nothing to be done
     }
 
