@@ -23,10 +23,9 @@ describe("enqueue", function () {
     async.enqueue(0);
   });
 
-  it("Will add to end", function (done) {
+  it("Will call once for each item added", function (done) {
     var timesCalled = 0;
     var delay = 50;
-    var whenToCallDone = delay * timesCalled + 1;
 
     var async = new vAsync(function (y, imDone) {
       setTimeout(function () {
@@ -45,6 +44,60 @@ describe("enqueue", function () {
     setTimeout(function () {
       async.enqueue(4);
     }, 1000);
+  });
+
+  it("Will call in order", function (done) {
+    var timesCalled = 0;
+    var delay = 50;
+
+    var async = new vAsync(function (y, imDone) {
+      setTimeout(function () {
+        assert.equal(y, timesCalled);
+
+        timesCalled += 1;
+        if (timesCalled === 5) {
+          done();
+        }
+        imDone(timesCalled);
+      }, delay);
+    });
+
+    for (var ii = 0; ii < 4; ii++) {
+      (function (x) {
+        async.enqueue(x);
+      })(ii);
+    }
+    setTimeout(function () {
+      async.enqueue(4);
+    }, 1000);
+  });
+
+  it("Will call in order with random delay", function (done) {
+    var timesCalled = 0;
+    var trials = 100;
+    var maxDelay = 10;
+    var async = new vAsync(function (y, imDone) {
+      var delay = Math.random() * maxDelay;
+      setTimeout(function () {
+        assert.equal(y, timesCalled);
+
+        timesCalled += 1;
+        if (timesCalled === trials) {
+          done();
+        }
+        imDone(timesCalled);
+      }, delay);
+    });
+
+    for (var ii = 0; ii < (trials - 1); ii++) {
+      (function (x) {
+        async.enqueue(x);
+      })(ii);
+    }
+
+    setTimeout(function () {
+      async.enqueue(trials - 1);
+    }, (trials * maxDelay) + 1);
   });
 });
 
