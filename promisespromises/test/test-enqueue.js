@@ -1,9 +1,3 @@
-/**
- *
- * Created by user on 5/25/16.
- */
-
-
 var vAsync = require("../flow-enqueue.js");
 var assert = require('chai').assert;
 
