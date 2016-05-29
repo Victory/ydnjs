@@ -16,6 +16,13 @@ describe("enqueue", function () {
     async.enqueue(0);
   });
 
+  it("Will take Array", function (done) {
+    var async = new vAsync(function () {
+      done();
+    });
+    async.enqueue([1, 2]);
+  });
+
   it("Will start eventually", function (done) {
     var async = new vAsync(function () {
       setTimeout(done, 100);

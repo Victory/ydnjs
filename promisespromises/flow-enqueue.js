@@ -33,7 +33,13 @@ var vAsync = function (doer) {
   };
 
   var enqueue = function (next) {
-    queue.push(next);
+    if (Array.isArray(next)) {
+      for (var ii = 0; ii < next.length; ii++) {
+        queue.push(next[ii]);
+      }
+    } else {
+      queue.push(next);
+    }
 
     // we have another running process that will pull next off the queue
     if (!isDone) {
