@@ -35,9 +35,17 @@ var vAsync = function (numAsync, doer) {
     if (typeof y === "undefined" && queue.length === 0) {
       return; // ... there is nothing to be done
     }
-    console.log(this.index, 'is handling', y);
 
-    doer(y, done.bind(this));
+    for (var ii = 0; ii < numAsync; ii++) {
+      if (!pool[ii].isDone)  {
+        continue;
+      }
+      pool[ii].isDone = false;
+      console.log(pool[ii].index, 'is handling', y);
+      doer(y, done.bind(pool[ii]));
+      return;
+    }
+
   };
 
   var pEnqueue = function (next) {
@@ -50,11 +58,6 @@ var vAsync = function (numAsync, doer) {
     }
 
     for (var ii = 0; ii < numAsync; ii++) {
-      var cur = pool[ii];
-      if (!cur.isDone) {
-        continue;
-      }
-      cur.isDone = false;
       pool[ii].prms.then(handleNext.bind(pool[ii]));;
     }
   };
