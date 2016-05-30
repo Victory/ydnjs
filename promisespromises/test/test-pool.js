@@ -5,12 +5,11 @@ var assert = require('chai').assert;
 describe("async pool", function () {
   this.timeout(25000);
 
-  /*
   it("will start", function (done) {
     var async = new vAsync(2, function () {
       done();
     });
-    async.enqueue(0);
+    async.pEnqueue(0);
   });
 
   it("will limit to 3", function (done) {
@@ -68,7 +67,6 @@ describe("async pool", function () {
       }
     }, 5);
   });
-   */
 
   it("will handle two rushes", function (done) {
     var index = 0;
@@ -83,14 +81,15 @@ describe("async pool", function () {
         imDone(y);
 
         timesCalled += 1;
-        if (timesCalled >= 6) {
+        if (timesCalled >= 7) {
           done();
         }
       }, timeout);
     });
     async.pEnqueue([1, 2, 3]);
     setTimeout(function () {
-      async.pEnqueue([4, 5, 6]);
+      console.log('pushing to queue');
+      async.pEnqueue([4, 5, 6, 7]);
     }, 4000);
   });
 });
